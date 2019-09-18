@@ -21,7 +21,7 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/home',
+      path: '/',
       name: 'home',
       component: Home,
       meta: {
@@ -58,7 +58,7 @@ const router = new Router({
       component: () =>
         import(/* webpackChunkName: "client-chunk-product-details" */ '@/views/Product.vue')
     },
-    { path: '*', redirect: '/home' }
+    { path: '*', redirect: '/' }
   ]
 })
 
