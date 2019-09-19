@@ -12,9 +12,9 @@
 
     <p v-if="loginError">{{ loginError }}</p>
     <!-- Auth UI -->
-    <a-button 
-      type="primary"
+    <a-button
       v-show="user !== undefined && !user && networkOnLine"
+      type="primary"
       data-test="login-btn"
       @click="login"
     >
