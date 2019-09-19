@@ -12,14 +12,14 @@
 
     <p v-if="loginError">{{ loginError }}</p>
     <!-- Auth UI -->
-    <div
+    <a-button 
+      type="primary"
       v-show="user !== undefined && !user && networkOnLine"
       data-test="login-btn"
-      class="login-btn"
       @click="login"
     >
-      Login with google
-    </div>
+      <a-icon type="google" /> Login With Google
+    </a-button>
   </div>
 </template>
 
