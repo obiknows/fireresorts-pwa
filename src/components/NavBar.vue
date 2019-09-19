@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar" :class="{ offline: !networkOnLine }">
+  <a-layout-header class="navbar" :class="{ offline: !networkOnLine }">
     <router-link to="/">
       <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
       <span class="site-name title-desktop">{{ appTitle }}</span>
@@ -30,7 +30,7 @@
         alt="Avatar"
       />
     </div>
-  </header>
+  </a-layout-header>
 </template>
 
 <script>
@@ -55,7 +55,7 @@ export default {
 @import '@/theme/variables.scss';
 
 .navbar {
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
   z-index: 20;

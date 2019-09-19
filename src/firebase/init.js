@@ -4,15 +4,16 @@ import 'firebase/auth'
 // The configuration below is not sensitive data. You can serenely add your config here
 
 const config = {
-  apiKey: 'AIzaSyCMSV4t2tDq5hfItCoDzxlfQ6209VYzpwU',
-  authDomain: 'cowry-capital.firebaseapp.com',
-  databaseURL: 'https://cowry-capital.firebaseio.com',
-  projectId: 'cowry-capital',
-  storageBucket: 'cowry-capital.appspot.com',
-  messagingSenderId: '1029141232450',
-  appId: '1:1029141232450:web:424b195b400f78b9e5e6db'
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DB_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MSG_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID
 }
 
+console.log(config)
 /*
 const config = {
   apiKey: 'AIzaSyCe6CSzOUs6_Ij_VHa6hancdEi6CNBtw7c',

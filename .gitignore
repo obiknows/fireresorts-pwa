@@ -10,6 +10,9 @@ node_modules
 .env.local
 .env.*.local
 
+# Or any env for that matter
+.env.*
+
 # Log files
 npm-debug.log*
 yarn-debug.log*
