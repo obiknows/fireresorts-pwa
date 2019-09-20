@@ -56,6 +56,7 @@
                   style="width: 100%"
                   v-decorator="['date-picker', dateConfig]"
                   format="ddd, MMM Do YYYY"
+                  :disabledDate="disabledDate"
                 />
               </a-form-item>
 
@@ -100,6 +101,8 @@
 
 <script>
 import { mapState } from 'vuex'
+import moment from 'moment';
+
 
 export default {
   data() {
@@ -128,6 +131,14 @@ export default {
   },
   computed: mapState('app', ['appTitle']),
   methods: {
+    moment,
+    range(start, end) {
+      const result = [];
+      for (let i = start; i < end; i++) {
+        result.push(i);
+      }
+      return result;
+    },
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
@@ -141,7 +152,11 @@ export default {
       this.form.setFieldsValue({
         note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`
       })
-    }
+    },
+    disabledDate(current) {
+      // Can not select days before today
+      return current && current < moment().startOf('day');
+    },
   }
 }
 </script>
