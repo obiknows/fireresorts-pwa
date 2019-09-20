@@ -1,5 +1,5 @@
 <template>
-  <a-layout-header class="navbar" :class="{ offline: !networkOnLine }">
+  <header class="navbar" :class="{ offline: !networkOnLine }">
     <router-link to="/">
       <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
       <span class="site-name title-desktop">{{ appTitle }}</span>
@@ -8,7 +8,10 @@
     <div class="links">
       <nav class="nav-links">
         <div class="nav-item">
-          <router-link to="/products">Products</router-link>
+          <router-link to="/products">How It Works</router-link>
+        </div>
+        <div class="nav-item">
+          <router-link to="/products">Events</router-link>
         </div>
         <div v-if="!isUserLoggedIn && networkOnLine" class="nav-item">
           <router-link to="/login">Login</router-link>
@@ -30,7 +33,7 @@
         alt="Avatar"
       />
     </div>
-  </a-layout-header>
+  </header>
 </template>
 
 <script>

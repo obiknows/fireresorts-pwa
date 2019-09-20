@@ -1,12 +1,14 @@
 <template>
   <div class="">
-      <a-row class="hero-row">
-        <a-col :span="13" style="">
-          <h1 style="color:white;">Izzzlit is the home of the hottest events.  </h1>
+      <a-row class="hero-row" style="height:100vh;width:100vw;" >
+        <a-col :span="13" style="padding-top:2%;" align="middle" justify="middle">
+          <a-col :span="12" :offset="6" style="background:rgba(0,0,0,0.55);padding:1%;border-radius:5px;">
+            <h1 style="color:white;">Izzzlit is the home of the hottest events.</h1>
+          </a-col>
         </a-col>
-        <a-col :span="11">
+        <a-col :span="11" justify="middle">
           <!-- RSVP FORM CARD -->
-          <a-card hoverable style="width: 400px">
+          <a-card hoverable style="width: 400px" >
             <h2>
               RSVP for the littest events 
             </h2>
@@ -89,7 +91,7 @@
 
               <!-- GO SEARCH IT -->
               <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-                <a-button type="primary" html-type="submit">Search</a-button>
+                <a-button type="primary" html-type="submit" size="large">Search</a-button>
               </a-form-item>
 
             </a-form>
@@ -132,13 +134,6 @@ export default {
   computed: mapState('app', ['appTitle']),
   methods: {
     moment,
-    range(start, end) {
-      const result = [];
-      for (let i = start; i < end; i++) {
-        result.push(i);
-      }
-      return result;
-    },
     handleSubmit(e) {
       e.preventDefault()
       this.form.validateFields((err, values) => {
@@ -156,7 +151,7 @@ export default {
     disabledDate(current) {
       // Can not select days before today
       return current && current < moment().startOf('day');
-    },
+    }
   }
 }
 </script>
@@ -167,5 +162,4 @@ export default {
 .hero-row {
   background: url('https://images.unsplash.com/photo-1541760866956-dcad73131a0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80');
 }
-
 </style>
