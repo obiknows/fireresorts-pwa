@@ -1,5 +1,6 @@
 <template>
   <div class="page-wrapper">
+    
     <product-detail
       v-if="currentProduct"
       :product="currentProduct"
@@ -12,7 +13,7 @@ import { mapGetters } from 'vuex'
 import ProductDetail from '@/components/ProductDetail'
 
 export default {
-  components: { ProductDetail },
+  components: { ProductDetail, MglMap },
   props: {
     id: String
   },

@@ -9,5 +9,9 @@ module.exports = {
     workboxOptions: {
       swSrc: path.join('public', 'service-worker.js')
     }
+  },
+  /* for ngrok */
+  devServer: {
+    disableHostCheck: true
   }
 }

@@ -13,7 +13,6 @@ const config = {
   appId: process.env.VUE_APP_FIREBASE_APP_ID
 }
 
-console.log(config)
 /*
 const config = {
   apiKey: 'AIzaSyCe6CSzOUs6_Ij_VHa6hancdEi6CNBtw7c',

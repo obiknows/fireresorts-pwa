@@ -4,7 +4,7 @@ import Antd from 'ant-design-vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import 'ant-design-vue/dist/antd.css'
+import 'ant-design-vue/dist/antd.less'
 
 import '@/misc/register-service-worker'
 import '@/misc/handle-network-status'
@@ -23,9 +23,9 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-console.log(`
-🍱 This app was bootstrapped with bento-starter 🍱
+// console.log(`
+// 🍱 This app was bootstrapped with bento-starter 🍱
 
-👉 https://bento-starter.netlify.com/
+// 👉 https://bento-starter.netlify.com/
 
-`)
+// `)

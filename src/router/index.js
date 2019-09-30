@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Head from 'vue-head'
 import Home from '@/views/Home'
 import CheckLogin from '@/views/CheckLogin'
+import RSVP from '@/views/RSVP'
+import RSVPConfirmed from '@/views/RSVPConfirmed'
 import { isNil } from 'lodash'
 import store from '@/store'
 
@@ -37,6 +39,22 @@ const router = new Router({
       }
     },
     {
+      path: '/rsvp-confirmed',
+      name: 'rsvp-confirmed',
+      component: RSVPConfirmed,
+      meta: {
+        authNotRequired: true
+      }
+    },
+    {
+      path: '/rsvp',
+      name: 'rsvp',
+      component: RSVP,
+      meta: {
+        authNotRequired: true
+      }
+    },
+    {
       path: '/login',
       name: 'login',
       component: () =>
@@ -44,6 +62,12 @@ const router = new Router({
       meta: {
         authNotRequired: true
       }
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () =>
+        import(/* webpackChunkName: "client-chunk-products" */ '@/views/Dashboard.vue')
     },
     {
       path: '/products',

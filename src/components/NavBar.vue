@@ -1,5 +1,5 @@
 <template>
-  <header class="navbar" :class="{ offline: !networkOnLine }">
+  <header class="navbar offline" :class="{ offline: !networkOnLine }">
     <router-link to="/">
       <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" />
       <span class="site-name title-desktop">{{ appTitle }}</span>
@@ -8,7 +8,7 @@
     <div class="links">
       <nav class="nav-links">
         <div class="nav-item">
-          <router-link to="/products">How It Works</router-link>
+          <router-link to="/products">Promoters</router-link>
         </div>
         <div class="nav-item">
           <router-link to="/products">Events</router-link>
@@ -66,7 +66,7 @@ export default {
   height: $navbar-height;
   background-color: $navbar-color;
   box-sizing: border-box;
-  border-bottom: 1px solid #eaecef;
+  // border-bottom: 1px solid #eaecef;
   padding: 0.7rem 1.5rem;
   line-height: 2.2rem;
 

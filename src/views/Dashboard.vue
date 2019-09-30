@@ -1,6 +1,8 @@
 <template>
   <div class="page-wrapper full-screen">
-    <MglMap :accessToken="accessToken" :mapStyle="mapStyle" />
+    <a-row>
+      <MglMap :accessToken="accessToken" :mapStyle="mapStyle" />
+    </a-row>
   </div>
 </template>
 

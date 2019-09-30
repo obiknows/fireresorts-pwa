@@ -1,6 +1,9 @@
 <template>
-  <div class="page-wrapper full-screen">
+  <div class="page-wrapper">
+    <h1 class="products-page-title">Products page</h1>
     <MglMap :accessToken="accessToken" :mapStyle="mapStyle" />
+    <product-list class="product-list"></product-list>
+    <add-product v-if="networkOnLine"></add-product>
   </div>
 </template>
 
