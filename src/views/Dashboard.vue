@@ -4,11 +4,10 @@
       <MglMap :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="10">
         <MglMarker :coordinates="drais" @click="onMarkerClick">
           <MglPopup anchor="bottom">
-            <a-card title="Card Title">
-              <a href="#" slot="extra">more</a>
-              <p>card content</p>
-              <p>card content</p>
-              <p>card content</p>
+            <a-card title="Drais Nightclub">
+              <!-- <a href="#" slot="extra">more</a> -->
+              <p>3595 S Las Vegas Blvd</p>
+              <a href="#">Visit Club Page</a>
             </a-card>
             <!-- <a-card
                 hoverable
