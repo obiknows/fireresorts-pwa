@@ -116,16 +116,95 @@
       <!-- EVENTS -->
       <a-row class="events-row almost-full-screen">
         <a-col :span="24" style="height:100%;background-color:brown;">
-          <a-row :lg=12 ></a-row>
+          <a-row align="middle" justify="center">
+            <h2 style="color:white;"  align="middle" justify="center">
+              Check our hottest upcoming events
+            </h2>
+          </a-row>
+          <a-row type="flex">
+            <a-col :sm="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 6 }"  align="middle" justify="center" type="flex">
+              <a-row>
+                <a-card
+                    hoverable
+                    style="width: 70%"
+
+                  >
+                  <img
+                    alt="example"
+                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    slot="cover"
+                  />
+                  <a-card-meta
+                    title="Europe Street beat">
+                    <template slot="description">www.instagram.com</template>
+                  </a-card-meta>
+                </a-card> 
+              </a-row>
+            </a-col>
+            <a-col :sm="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 6 }"  align="middle" justify="center">
+              <a-row>
+                <a-card
+                    hoverable
+                    style="width: 70%"
+                  >
+                  <img
+                    alt="example"
+                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    slot="cover"
+                  />
+                  <a-card-meta
+                    title="Europe Street beat">
+                    <template slot="description">www.instagram.com</template>
+                  </a-card-meta>
+                </a-card> 
+              </a-row>
+            </a-col>
+            <a-col :sm="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 6 }"  align="middle" justify="center">
+              <a-row>
+                <a-card
+                    hoverable
+                    style="width: 70%"
+                  >
+                  <img
+                    alt="example"
+                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    slot="cover"
+                  />
+                  <a-card-meta
+                    title="Europe Street beat">
+                    <template slot="description">www.instagram.com</template>
+                  </a-card-meta>
+                </a-card> 
+              </a-row>
+            </a-col>
+            <a-col :sm="{ span: 24 }" :md="{ span: 12 }" :lg="{ span: 6 }"  align="middle" justify="center">
+              <a-row>
+                <a-card
+                    hoverable
+                    style="width: 70%"
+                  >
+                  <img
+                    alt="example"
+                    src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    slot="cover"
+                  />
+                  <a-card-meta
+                    title="Europe Street beat">
+                    <template slot="description">www.instagram.com</template>
+                  </a-card-meta>
+                </a-card> 
+              </a-row>
+            </a-col>
+          </a-row>
         </a-col>
       </a-row>
       <!-- PROMTER VALUE EXPLANATION + CTA (PROMOTER SIGN UP) -->
-      <a-row class="what  almost-full-screen">
+      <a-row class="almost-full-screen">
         <a-col :md="24" :lg="12" style="height:100%;"></a-col>
         <a-col :md="24" :lg="12" style="height:100%;background-color:red;"></a-col>
       </a-row>
       <!-- COUNTDOWN -->
-      <a-row class="countdown-row almost=fullscreen" type="flex" justify="center">
+      <a-row class="countdown-row almost-full-screen" type="flex" justify="center">
           <a-card
             hoverable
             style="width: 60%;"
