@@ -1,11 +1,14 @@
 <template>
   <div id="app">
     <a-layout>
-        <nav-bar></nav-bar>
+      <nav-bar></nav-bar>
       <!-- <div class="main-wrapper"> -->
       <a-layout-content>
         <router-view />
       </a-layout-content>
+      <footer>
+        <SiteFooter></SiteFooter>
+      </footer>
     </a-layout>
     <!-- </div> -->
 
@@ -25,12 +28,13 @@
 </template>
 <script>
 import NavBar from '@/components/NavBar'
+import SiteFooter from '@/components/Footer'
 import NewContentAvailableToastr from '@/components/NewContentAvailableToastr'
 import AppleAddToHomeScreenModal from '@/components/AppleAddToHomeScreenModal'
 import { mapState, mapActions, mapGetters } from 'vuex'
 
 export default {
-  components: { NavBar, NewContentAvailableToastr, AppleAddToHomeScreenModal },
+  components: { NavBar, SiteFooter, NewContentAvailableToastr, AppleAddToHomeScreenModal },
   computed: {
     ...mapGetters('app', ['newContentAvailable']),
     ...mapState('app', ['showAddToHomeScreenModalForApple', 'refreshingApp'])

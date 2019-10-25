@@ -2,6 +2,7 @@
   <div class="page-wrapper full-screen">
     <div style="height:100vh;width:100vw;">
       <MglMap :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="10">
+        <!-- DRAIS -->
         <MglMarker :coordinates="drais" @click="onMarkerClick">
           <MglPopup anchor="bottom">
             <a-card title="Drais Nightclub">
@@ -31,6 +32,8 @@
             </a-card> -->
           </MglPopup>
         </MglMarker>
+        
+
       </MglMap>
     </div>
     <!-- <div style="height:30vh;width:100vw;">

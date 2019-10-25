@@ -23,7 +23,7 @@
         >
           <a>Logout</a>
         </div>
-        <div v-if="!networkOnLine" class="nav-item offline-label">Offline</div>
+        <!-- <div v-if="!networkOnLine" class="nav-item offline-label">Offline</div> -->
       </nav>
 
       <img
