@@ -2,7 +2,9 @@
   <header class="navbar offline" :class="{ offline: !networkOnLine }">
     <router-link to="/">
       <!-- <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" /> -->
-      <img alt="logo-bento" class="logo" src="@/assets/img/izzzlit-logotype-dark.svg" />
+      <img alt="logo-bento" class="logo" src="@/assets/img/izzzlit-logotype-dark.png" />
+      <!-- <span class="site-name title-desktop">{{ appTitle }}</span> -->
+      <!-- <span class="site-name title-mobile">{{ appShortTitle }}</span> -->
     </router-link>
     <div class="links">
       <nav class="nav-links">
