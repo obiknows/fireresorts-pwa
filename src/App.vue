@@ -6,9 +6,7 @@
       <a-layout-content>
         <router-view />
       </a-layout-content>
-      <footer>
-        <SiteFooter></SiteFooter>
-      </footer>
+      <SiteFooter></SiteFooter>
     </a-layout>
     <!-- </div> -->
 

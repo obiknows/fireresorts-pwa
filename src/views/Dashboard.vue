@@ -1,47 +1,45 @@
 <template>
   <div class="page-wrapper full-screen">
     <div style="height:100vh;width:100vw;">
-      <MglMap :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="10">
-        <!-- DRAIS -->
-        <MglMarker :coordinates="drais" @click="onMarkerClick">
-          <MglPopup anchor="bottom">
-            <a-card title="Drais Nightclub">
-              <!-- <a href="#" slot="extra">more</a> -->
-              <p>3595 S Las Vegas Blvd</p>
-              <a href="#">Visit Club Page</a>
-            </a-card>
-            <!-- <a-card
-                hoverable
-                style="width: 20px;height:50px;"
-              >
-              <img
-                alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                slot="cover"
-              />
-              <template class="ant-card-actions" slot="actions">
-                <a-icon type="setting" />
-                <a-icon type="edit" />
-                <a-icon type="ellipsis" />
-              </template>
-              <a-card-meta
-                title="Card title"
-                description="This is the description">
-                <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-              </a-card-meta>
-            </a-card> -->
-          </MglPopup>
-        </MglMarker>
-        
-
-      </MglMap>
+      <div style="height: 100vh; width:45vw; position: absolute; background-color: red; z-index:10;">
+        <p style="background-color: red">EVENTS HAPPENING</p>
+      </div>
+      <div style="height: 100vh; width:55vw; z-index:10; position: absolute; right: 0;">
+        <MglMap :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="10">
+          <!-- DRAIS -->
+          <MglMarker :coordinates="drais" @click="onMarkerClick">
+            <MglPopup anchor="bottom">
+              <a-card title="Drais Nightclub">
+                <!-- <a href="#" slot="extra">more</a> -->
+                <p>3595 S Las Vegas Blvd</p>
+                <a href="#">Visit Club Page</a>
+              </a-card>
+              <!-- <a-card
+                  hoverable
+                  style="width: 20px;height:50px;"
+                >
+                <img
+                  alt="example"
+                  src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  slot="cover"
+                />
+                <template class="ant-card-actions" slot="actions">
+                  <a-icon type="setting" />
+                  <a-icon type="edit" />
+                  <a-icon type="ellipsis" />
+                </template>
+                <a-card-meta
+                  title="Card title"
+                  description="This is the description">
+                  <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                </a-card-meta>
+              </a-card> -->
+            </MglPopup>
+          </MglMarker>
+        </MglMap>
+      </div>
+      
     </div>
-    <!-- <div style="height:30vh;width:100vw;">
-      <h3>Events</h3>
-      <a-card>
-
-      </a-card>
-    </div> -->
   </div>
 </template>
 
@@ -102,4 +100,6 @@ export default {
 .product-list {
   margin: 20px 0;
 }
+
+
 </style>

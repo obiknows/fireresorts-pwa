@@ -7,15 +7,25 @@
     </router-link>
     <div class="links">
       <nav class="nav-links">
-        <div class="nav-item">
+        <div v-if="!isUserLoggedIn" class="nav-item">
           <router-link to="/products">Promoters</router-link>
         </div>
-        <div class="nav-item">
-          <router-link to="/products">Events</router-link>
+        <!-- LIT MAP -->
+        <div v-if="isUserLoggedIn" class="nav-item">
+          <router-link to="/dashboard">Map</router-link>
         </div>
+        <!-- MY EVENTS -->
+        <div v-if="!isUserLoggedIn" class="nav-item">
+          <router-link to="/events">Events</router-link>
+        </div>
+        <div v-if="isUserLoggedIn" class="nav-item">
+          <router-link to="/events">My Events</router-link>
+        </div>
+        <!-- LOGIN -->
         <div v-if="!isUserLoggedIn && networkOnLine" class="nav-item">
           <router-link to="/login">Login</router-link>
         </div>
+        <!-- LOGOUT -->
         <div
           v-if="isUserLoggedIn && networkOnLine"
           class="nav-item logout-item"
@@ -23,15 +33,20 @@
         >
           <a>Logout</a>
         </div>
-        <!-- <div v-if="!networkOnLine" class="nav-item offline-label">Offline</div> -->
       </nav>
-
-      <img
+      <!-- Profile -->
+      <a
         v-if="isUserLoggedIn && networkOnLine"
-        class="user-picture can-hide"
-        :src="user.photoURL"
-        alt="Avatar"
-      />
+        href="/profile"
+      >
+        <img
+          v-if="isUserLoggedIn && networkOnLine"
+          class="user-picture can-hide"
+          :src="user.photoURL"
+          alt="Avatar"
+
+        />
+      </a>
     </div>
   </header>
 </template>
