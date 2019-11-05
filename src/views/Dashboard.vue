@@ -1,10 +1,10 @@
 <template>
   <div class="page-wrapper full-screen">
     <div style="height:100vh;width:100vw;">
-      <div style="height: 100vh; width:45vw; position: absolute; background-color: red; z-index:10;">
-        <p style="background-color: red">EVENTS HAPPENING</p>
+      <div style="height: 100vh; width:40vw; position: absolute; background-color: red; z-index:10;">
+        <p style="background-color: red">IZZLIT EVENTS HAPPENING TONIGHT</p>
       </div>
-      <div style="height: 100vh; width:55vw; z-index:10; position: absolute; right: 0;">
+      <div style="height: 100vh; width:60vw; z-index:10; position: absolute; right: 0;">
         <MglMap :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="10">
           <!-- DRAIS -->
           <MglMarker :coordinates="drais" @click="onMarkerClick">
