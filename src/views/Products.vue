@@ -1,6 +1,5 @@
 <template>
-  <div class="page-wrapper full-screen">
-    <MglMap :accessToken="accessToken" :mapStyle="mapStyle" />
+  <div class="page-wrapper full-screen" style="height:100vh;width:100vw;background:white;">
   </div>
 </template>
 
@@ -16,13 +15,9 @@ export default {
   computed: mapState('app', ['networkOnLine']),
   data() {
     return {
-      accessToken: "pk.eyJ1Ijoib2Jpbm5hLWl6enpsaXQiLCJhIjoiY2sxNXh5aXJjMDE5MDNobWoxZ29hbXNxYyJ9.N_Go-CocmmlnDfl-cnJGkA", // your access token. Needed if you using Mapbox maps
-      mapStyle: "mapbox://styles/obinna-izzzlit/ck15zi1t22xuw1cq6cugyg14f" // your map style
     };
   },
   created() {
-    // We need to set mapbox-gl library here in order to use it in template
-    this.mapbox = Mapbox;
   }
 }
 </script>

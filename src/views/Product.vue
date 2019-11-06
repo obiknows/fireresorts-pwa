@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper">
+  <div class="page-wrapper" style="height:100vh;width:100vw;background:white;">
     
     <product-detail
       v-if="currentProduct"

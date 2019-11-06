@@ -70,14 +70,14 @@ const router = new Router({
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Dashboard.vue')
     },
     {
-      path: '/products',
-      name: 'products',
+      path: '/events',
+      name: 'events',
       component: () =>
         import(/* webpackChunkName: "client-chunk-products" */ '@/views/Products.vue')
     },
     {
-      path: '/products/:id',
-      name: 'product',
+      path: '/event/:id',
+      name: 'event-page',
       props: true,
       component: () =>
         import(/* webpackChunkName: "client-chunk-product-details" */ '@/views/Product.vue')

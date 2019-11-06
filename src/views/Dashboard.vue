@@ -1,7 +1,8 @@
 <template>
   <div class="page-wrapper full-screen">
     <div style="height:100vh;width:100vw;">
-      <div style="height: 100vh; width:45vw; position: absolute; z-index:10; overflow: auto;">
+      <!-- PANEL -->
+      <div class="panel">
         <h1 style="padding-left:30px; padding-top:30px;">Lit Events Tonight</h1>
         <!-- EVENTS GRID -->
         <div class="gutter-example">
@@ -19,19 +20,23 @@
                     <template slot="title">Chateau</template>
                     <template slot="description">10:30 PM - 11:55 PM</template>
                   </a-card-meta>
+                  <!-- <template class="ant-card-actions" slot="actions">
+                    <a-icon type="schedule" />
+                    <a-icon type="calendar" />
+                  </template> -->
                 </a-card>
               </a>
             </a-col>
             <a-col class="gutter-row" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 12}">
               <!-- ANOTHER CARD -->
               <a>
-                <a-card style="">
+                <a-card>
                   <img
                     alt="example"
                     src="https://d3nxoulyw7bc8u.cloudfront.net/images/events/d6f69d69-3e3c-48b7-941f-f5e6081f14b8.jpg"
                     slot="cover"
                   />
-                  <a-card-meta title="DJ Zo Sound & Color Industry Wednesdays">
+                  <a-card-meta title="DJ Zo Sound / Color Industry Wednesdays">
                     <template slot="title">On The Record</template>
                     <template slot="description">10:30 PM - 4:00 AM</template>
                   </a-card-meta>
@@ -41,16 +46,14 @@
             <a-col class="gutter-row" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 12}">
               <!-- A CARD -->
               <a>
-                <a-card style="">
+                <a-card>
                   <img
                     alt="example"
                     src="https://d3nxoulyw7bc8u.cloudfront.net/images/events/5a1f11cd-9bb2-44ef-a60a-c47fb8cb7733.jpg"
                     slot="cover"
                   />
                   <a-card-meta title="Official Lexani Afterparty 2019 with DJ Quik">
-                    <template slot="title"
-                      >Chateau</template
-                    >
+                    <template slot="title">Chateau</template>
                     <template slot="description">10:30 PM - 11:55 PM</template>
                   </a-card-meta>
                 </a-card>
@@ -59,16 +62,14 @@
             <a-col class="gutter-row" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 12}">
               <!-- A CARD -->
               <a>
-                <a-card style="">
+                <a-card>
                   <img
                     alt="example"
                     src="https://d3nxoulyw7bc8u.cloudfront.net/images/events/5a1f11cd-9bb2-44ef-a60a-c47fb8cb7733.jpg"
                     slot="cover"
                   />
                   <a-card-meta title="Official Lexani Afterparty 2019 with DJ Quik">
-                    <template slot="title"
-                      >Chateau</template
-                    >
+                    <template slot="title">Chateau</template>
                     <template slot="description">10:30 PM - 11:55 PM</template>
                   </a-card-meta>
                 </a-card>
@@ -76,9 +77,9 @@
             </a-col>
           </a-row>
         </div>
-
       </div>
-      <div style="height: 100vh; width:55vw; z-index:10; position: absolute; right: 0;">
+      <!-- MAP PANE -->
+      <div class="map-pane">
         <MglMap :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="10">
           <!-- DRAIS -->
           <MglMarker :coordinates="drais" @click="onMarkerClick">
@@ -86,7 +87,7 @@
               <a-card title="Drais Nightclub">
                 <!-- <a href="#" slot="extra">more</a> -->
                 <p>3595 S Las Vegas Blvd</p>
-                <a href="#">Visit Club Page</a>
+                <a href="/event/12312415125212">Visit Club Page</a>
               </a-card>
               <!-- <a-card
                   hoverable
@@ -112,7 +113,6 @@
           </MglMarker>
         </MglMap>
       </div>
-      
     </div>
   </div>
 </template>
@@ -146,18 +146,19 @@ export default {
       let marker = payload.marker
       let markerComponent = payload.component
       let map = payload.map
-
+      
+      // get the coordinates
       let markerCoords= markerComponent.coordinates
 
-
+      // fly the map to the new center
       const newParams = await map.flyTo({
         center: markerCoords,
-        zoom: 13,
+        zoom: 12,
         speed: 1
       })
 
-      console.log(newParams);
-      
+      // scrollTo & highlight the correct event in the panel
+
     }
   }
 }
@@ -175,7 +176,7 @@ export default {
   margin: 20px 0;
 }
 
-.left-pane {
+.panel {
   height: 100vh;
   width:45vw; 
   position: absolute;
@@ -183,7 +184,7 @@ export default {
   overflow: auto;
 }
 
-.right-pane {
+.map-pane {
   height: 100vh;
   width:55vw;
   z-index:10;
@@ -211,5 +212,31 @@ export default {
   .gutter-row{
     padding-top: 16px;
   }
+
+  .active {
+    border: 2px solid $vue-color;
+  }
+  
+  /* */
+  
+  /* On screens that are 440px or less, move the panel to bottom */
+  @media screen and (max-width: 440px) {
+    .panel {
+      height: 50vh;
+      width: 100vw; 
+      position: absolute;
+      bottom: 0;
+      z-index: 10;
+      overflow: auto;
+    }
+
+    .map-pane{
+      height: 50vh;
+      width: 100vw;
+      z-index: 10;
+      position: absolute;
+      top: 0;
+     }
+  } 
 
 </style>
