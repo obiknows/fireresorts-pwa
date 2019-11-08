@@ -10,18 +10,19 @@
           <!-- RSVP FORM CARD -->
           <a-card hoverable style="width: 400px; max-height:20%" >
             <h2>
-              RSVP for the littest events 
+              RSVP for the Littest Events 
             </h2>
             
             <!-- RSVP FORM -->
-            <a-form :form="form" hideRequiredMark="true" @submit="handleSubmit">
+            <a-form :form="form" hideRequiredMark @submit="handleSubmit">
               <!-- TYPE (DAY< NIGHT < STRIP) -->
               <a-form-item
+                v-model="eventType"
                 label="Kind"
                 :label-col="{ span: 5}"
                 :wrapper-col="{ span: 16}"
               >
-                <a-radio-group defaultValue="day" buttonStyle="solid" v-model="partyType">
+                <a-radio-group buttonStyle="solid" v-decorator="['eventType']">
                   <a-radio-button value="day">Day</a-radio-button>
                   <a-radio-button value="night">Night</a-radio-button>
                   <a-radio-button value="strip">Strip</a-radio-button>
@@ -60,16 +61,14 @@
               
               <!-- WHEN -->
               <a-form-item
-                v-bind="formItemLayout"
                 :label-col="{ span: 5 }"
                 :wrapper-col="{ span: 14 }"
                 label="When"
                 has-feedback
               >
                 <a-date-picker
-                  v-model="date"
                   style="width: 100%"
-                  v-decorator="['date-picker', dateConfig]"
+                  v-decorator="['eventDate', dateConfig]"
                   format="ddd, MMM Do YYYY"
                   :disabledDate="disabledDate"
                 />
@@ -80,12 +79,11 @@
                 label="Where"
                 :label-col="{ span: 5 }"
                 :wrapper-col="{ span: 14 }"
-                v-bind="formItemLayout"
                 has-feedback
               >
                 <a-select
                   v-decorator="[
-                    'location',
+                    'where',
                     {rules: [{ required: true, message: 'Please select a city' }]}
                   ]"
                   placeholder="Select a City"
@@ -104,34 +102,78 @@
 
               <!-- GO SEARCH IT -->
               <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
-                <router-link to="rsvp">
-                  <a-button type="primary" html-type="submit" size="large">RSVP</a-button>
-                </router-link >
+                <!-- <router-link to="rsvp"> -->
+                <a-button type="primary" html-type="submit" size="large" @click="showModal">RSVP</a-button>
+                <!-- </router-link > -->
               </a-form-item>
 
             </a-form>
           </a-card>
         </a-col>
       </a-row>
-      
+      <!-- MODAL -->
+      <a-modal title="Almost There" v-model="modalVisible" :footer="null" :closeable="false">
+        <!-- RSVP FORM -->
+        <a-form :form="form" hideRequiredMark @submit="handleSubmit">
+          <h3>Before we create your RSVP, we need 2 last things</h3>
+
+          <a-form-item
+            :label-col="{ span: 4, }"
+            :wrapper-col="{ span: 12, offset: 4 }"
+            label="Name"
+          >
+            <a-input
+              v-decorator="[
+                'name',
+                { rules: [{ required: true, message: 'Please input your name' }] },
+              ]"
+              placeholder="Please input your name"
+            />
+          </a-form-item>
+          <a-form-item
+            :label-col="{ span: 4, }"
+            :wrapper-col="{ span: 12, offset:4 }"
+            label="Phone"
+          >
+            <a-input
+              v-decorator="[
+                'phone',
+                { rules: [{ required: true, message: 'Please input your mobile number' }] },
+              ]"
+              placeholder="Please input your mobile number"
+            />
+          </a-form-item>
+          <div style="text-align:center;">
+            <a-button type="primary" html-type="submit" size="large" @click="handleFormSubmit" :disabled="isSent" >Create</a-button>
+          </div>
+        </a-form>
+      </a-modal>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import moment from 'moment';
+import axios from 'axios';
+import { log } from 'util';
 
 
 export default {
   data() {
     return {
+      // MODAL CONFIG
+      modalVisible: false,
+      isSent: false,
       // FORM CONFIG
+      eventType: '0',
       partyType: 'a',
       dateConfig: {
         rules: [{ required: true, type: 'object', message: 'Please select a date' }]
       },
       formLayout: 'horizontal',
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      // form2: this.$form2.createForm(this, { name: 'last-check' }),
+      
     }
   },
   head: function() {
@@ -162,16 +204,60 @@ export default {
         }
       })
     },
-    handleSelectChange(value) {
-      console.log(value)
-      this.form.setFieldsValue({
-        note: `Hi, ${value === 'male' ? 'man' : 'lady'}!`
+    handleFormSubmit(e) {
+      e.preventDefault()
+      this.isSent = true
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log('Received values of form: ', values)
+
+          const type = values.eventType
+          const women = values.womenCount
+          const men = values.menCount
+          const name = values.name
+          const place = values.where
+          const phone = values.phone
+          const date = moment(values.eventDate).valueOf()
+      
+          
+          // // formulate the GET request to /rsvp/create
+          axios
+          // .get(`https://api.izzzlit.com/rsvp/create/?type=${type}&women=${women}&men=${men}&place=${place}&phone=${phone}&date=${date}&name=${name}`)
+          .get(`http://localhost:7001/rsvp/create/?type=${type}&women=${women}&men=${men}&place=${place}&phone=${phone}&date=${date}&name=${name}`)
+          .then(response => {
+            if(response.status == 200) {
+              console.log(response);
+              console.log(`${response.data.rsvp}`);
+
+              // close the modal --> false
+              this.modalVisible = false;
+
+              // go to confirmation page
+              this.$router.push({ name: 'rsvp', params: { rsvpId: response.data.id }})
+            } else {
+              // allow retry
+              this.isSent = false
+            }
+
+
+          });
+
+          
+        }
+      })
+    },
+    showModal() {
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          // console.log('Received values of form: ', values)
+          this.modalVisible = true;
+        }
       })
     },
     disabledDate(current) {
       // Can not select days before today
       return current && current < moment().startOf('day');
-    }
+    },
   }
 }
 </script>
@@ -180,7 +266,11 @@ export default {
 @import '@/theme/variables.scss';
 
 .hero-row {
-  background: url('https://images.unsplash.com/photo-1541760866956-dcad73131a0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80');
+  background: url('https://images.unsplash.com/photo-1541760866956-dcad73131a0b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80') no-repeat top center ;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .full-screen {

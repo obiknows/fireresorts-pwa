@@ -10,7 +10,7 @@
             <a-col class="gutter-row" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 12}">
               <!-- A CARD -->
               <a>
-                <a-card style="">
+                <a-card class="event-card">
                   <img
                     alt="example"
                     src="https://d3nxoulyw7bc8u.cloudfront.net/images/events/5a1f11cd-9bb2-44ef-a60a-c47fb8cb7733.jpg"
@@ -30,7 +30,7 @@
             <a-col class="gutter-row" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 12}">
               <!-- ANOTHER CARD -->
               <a>
-                <a-card>
+                <a-card class="event-card">
                   <img
                     alt="example"
                     src="https://d3nxoulyw7bc8u.cloudfront.net/images/events/d6f69d69-3e3c-48b7-941f-f5e6081f14b8.jpg"
@@ -46,7 +46,7 @@
             <a-col class="gutter-row" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 12}">
               <!-- A CARD -->
               <a>
-                <a-card>
+                <a-card class="event-card">
                   <img
                     alt="example"
                     src="https://d3nxoulyw7bc8u.cloudfront.net/images/events/5a1f11cd-9bb2-44ef-a60a-c47fb8cb7733.jpg"
@@ -62,7 +62,7 @@
             <a-col class="gutter-row" :xs="{span: 24}" :sm="{span: 24}" :md="{span: 12}" :lg="{span: 12}">
               <!-- A CARD -->
               <a>
-                <a-card>
+                <a-card class="event-card">
                   <img
                     alt="example"
                     src="https://d3nxoulyw7bc8u.cloudfront.net/images/events/5a1f11cd-9bb2-44ef-a60a-c47fb8cb7733.jpg"
@@ -81,34 +81,20 @@
       <!-- MAP PANE -->
       <div class="map-pane">
         <MglMap :accessToken="accessToken" :mapStyle="mapStyle" :center="center" :zoom="10">
+          <!-- CONTROLS -->
+          <!-- <MglGeolocateControl position="bottom-right" /> -->
+          <MglNavigationControl position="top-right" />
           <!-- DRAIS -->
           <MglMarker :coordinates="drais" @click="onMarkerClick">
-            <MglPopup anchor="bottom">
-              <a-card title="Drais Nightclub">
-                <!-- <a href="#" slot="extra">more</a> -->
-                <p>3595 S Las Vegas Blvd</p>
-                <a href="/event/12312415125212">Visit Club Page</a>
-              </a-card>
-              <!-- <a-card
-                  hoverable
-                  style="width: 20px;height:50px;"
-                >
-                <img
-                  alt="example"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  slot="cover"
-                />
-                <template class="ant-card-actions" slot="actions">
-                  <a-icon type="setting" />
-                  <a-icon type="edit" />
-                  <a-icon type="ellipsis" />
-                </template>
-                <a-card-meta
-                  title="Card title"
-                  description="This is the description">
-                  <a-avatar slot="avatar" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                </a-card-meta>
-              </a-card> -->
+            <MglPopup anchor="bottom" style="margin:5%;">
+              <div class="popup-container">
+                <div>
+                  <img src="https://d3nxoulyw7bc8u.cloudfront.net/images/venue_template/0ce9dc86-5093-4202-83bb-89bd299fd9a8.jpg" alt="" srcset="" style="height:50%;">
+                  <h1>Drais Nightclub</h1>
+                  <p>3595 S Las Vegas Blvd</p>
+                  <a href="/venue/drais">Visit Club Page</a>
+                </div>
+              </div>
             </MglPopup>
           </MglMarker>
         </MglMap>
@@ -122,10 +108,10 @@ import { mapState } from 'vuex'
 import ProductList from '@/components/ProductList'
 import AddProduct from '@/components/AddProduct'
 import Mapbox from "mapbox-gl";
-import { MglMap, MglMarker, MglPopup } from "vue-mapbox";
+import { MglMap, MglMarker, MglPopup, MglGeolocateControl, MglNavigationControl } from "vue-mapbox";
 
 export default {
-  components: { ProductList, AddProduct, MglMap, MglPopup, MglMarker },
+  components: { ProductList, AddProduct, MglMap, MglPopup, MglMarker, MglGeolocateControl, MglNavigationControl },
   computed: mapState('app', ['networkOnLine']),
   data() {
     return {
@@ -216,8 +202,18 @@ export default {
   .active {
     border: 2px solid $vue-color;
   }
+
+  .event-card {
+    margin: 10%;
+  }
   
+  .popup-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
   /* */
+
   
   /* On screens that are 440px or less, move the panel to bottom */
   @media screen and (max-width: 440px) {

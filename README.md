@@ -4,7 +4,7 @@
 
 ## TODOS
 
-- [ ] Make the DashBoard Map Mobile Friendly   
+- [x] Make the DashBoard Map Mobile Friendly   
 - [ ] Find Carousel for Events Screen
 - [ ] Copy in Carousel for Events Screen
 - [ ] Test Events Screen on Mobile
