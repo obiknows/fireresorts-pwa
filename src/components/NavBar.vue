@@ -1,11 +1,15 @@
 <template>
   <header class="navbar offline" :class="{ offline: !networkOnLine }">
-    <router-link to="/">
-      <!-- <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" /> -->
-      <img alt="logo-bento" class="logo" src="@/assets/img/izzzlit-logotype-dark.png" />
-      <!-- <span class="site-name title-desktop">{{ appTitle }}</span> -->
-      <!-- <span class="site-name title-mobile">{{ appShortTitle }}</span> -->
-    </router-link>
+    <div class="brand">
+      <div class="brand-logo">
+        <!-- <img alt="logo-bento" class="logo" src="@/assets/img/bento-starter.svg" /> -->
+        <router-link to="/">
+          <img alt="izzzlit" class="logo" src="@/assets/img/izzzlit-logotype-dark.png" />
+        </router-link>
+        <!-- <span class="site-name title-desktop">{{ appTitle }}</span> -->
+        <!-- <span class="site-name title-mobile">{{ appShortTitle }}</span> -->
+      </div>
+    </div>
     <div class="links">
       <nav class="nav-links">
         <div v-if="!isUserLoggedIn" class="nav-item">
@@ -126,6 +130,32 @@ export default {
     height: 24px;
     padding-right: 8px;
   }
+
+  // MEDIA QUERY FOR LOGO
+  @media screen and (max-width: 480px) {
+    .logo {
+      height: 16px;
+      padding-right: 8px;
+    }
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand {
+    box-sizing: border-box;
+    white-space: nowrap;
+    font-size: 0.9rem;
+    position: absolute;
+    left: 1.5rem;
+    top: 0.7rem;
+    display: flex;
+    height: 1.9rem;
+  }
+
 
   .links {
     padding-left: 1.5rem;

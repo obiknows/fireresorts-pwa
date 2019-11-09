@@ -2,36 +2,63 @@
 <a-row align="middle" justify="center">
   <a-col :xs="{ span: 24, offset: 0 }" :md="{ span: 12, offset: 6 }" align="middle" justify="center">
     <a-card style="max-width:700px;">
-      <h1>Login</h1>
+      <h1>Create An Account</h1>
       <a-form
         id="components-form-demo-normal-login"
         :form="form"
         class="login-form"
         @submit="handleSubmit"
       >
-        <a-form-item>
+        <!-- EMAIL -->
+        <a-form-item 
+          :xs="{ span: 24, offset: 0 }"
+          :md="{ span: 12, offset: 6 }"
+          :lg="{ span: 12, offset: 6 }"
+        >
           <a-input
             v-decorator="[
-              'userName',
-              { rules: [{ required: true, message: 'Please input your username!' }] }
+              'email',
+              {
+                rules: [
+                  {
+                    type: 'email',
+                    message: 'The input is not valid E-mail!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your E-mail!',
+                  },
+                ],
+              },
             ]"
-            placeholder="Username"
+            placeholder="Email"
           >
-            <a-icon
-              slot="prefix"
-              type="user"
-              style="color: rgba(0,0,0,.25)"
-            />
+          <a-icon
+            slot="prefix"
+            type="lock"
+            style="color: rgba(0,0,0,.25)"
+          />
           </a-input>
         </a-form-item>
+        <!-- PASSWORD -->
         <a-form-item>
           <a-input
             v-decorator="[
               'password',
-              { rules: [{ required: true, message: 'Please input your Password!' }] }
+              {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please input your password!',
+                  },
+                  {
+                    validator: validateToNextPassword,
+                  },
+                ],
+              },
             ]"
             type="password"
-            placeholder="Password"
+            placeholder="Enter your password"
           >
             <a-icon
               slot="prefix"
@@ -40,34 +67,52 @@
             />
           </a-input>
         </a-form-item>
-        <a-form-item>
-          <a-checkbox
+        <!-- CHECK PASSWORD -->
+        <a-form-item >
+          <a-input
             v-decorator="[
-              'remember',
+              'confirm',
               {
-                valuePropName: 'checked',
-                initialValue: true,
-              }
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please confirm your password!',
+                  },
+                  {
+                    validator: compareToFirstPassword,
+                  },
+                ],
+              },
             ]"
+            type="password"
+            placeholder="Confirm your password"
+            @blur="handleConfirmBlur"
           >
-            Remember me
-          </a-checkbox>
-          <a
-            class="login-form-forgot"
-            href=""
+          <a-icon
+            slot="prefix"
+            type="lock"
+            style="color: rgba(0,0,0,.25)"
+          />
+          </a-input>
+        </a-form-item>
+        <!-- PHONE NUM -->
+        <a-form-item >
+          <a-input
+            v-decorator="[
+              'phone',
+              {
+                rules: [{ required: true, message: 'Please input your phone number!' }],
+              },
+            ]"
+            style="width: 100%"
+            placeholder="Enter your phone number"
           >
-            Forgot password
-          </a>
-          <a-button
-            type="primary"
-            html-type="submit"
-            class="login-form-button"
-          >
-            Log in
-          </a-button>
-          Or <router-link to="register">
-            register now!
-            </router-link>
+          <a-icon
+            slot="prefix"
+            type="phone"
+            style="color: rgba(0,0,0,.25)"
+          />
+          </a-input>
         </a-form-item>
       </a-form>
       <!--  -->
@@ -77,9 +122,11 @@
         data-test="login-btn"
         @click="login"
       >
-        <a-icon type="google" /> Login With Google
+        Create An Account
       </a-button>
+
     </a-card>
+    
   </a-col>
 </a-row>
 </template>
@@ -95,7 +142,7 @@ export default {
   head: function() {
     return {
       title: {
-        inner: 'Login'
+        inner: 'Register'
       },
       meta: [
         {
@@ -149,6 +196,21 @@ export default {
           console.log('Received values of form: ', values);
         }
       });
+    },
+    compareToFirstPassword(rule, value, callback) {
+      const form = this.form;
+      if (value && value !== form.getFieldValue('password')) {
+        callback('Two passwords that you enter is inconsistent!');
+      } else {
+        callback();
+      }
+    },
+    validateToNextPassword(rule, value, callback) {
+      const form = this.form;
+      if (value && this.confirmDirty) {
+        form.validateFields(['confirm'], { force: true });
+      }
+      callback();
     },
   },
   beforeCreate () {

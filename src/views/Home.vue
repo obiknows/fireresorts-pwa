@@ -125,7 +125,6 @@
             <a-input
               v-decorator="[
                 'name',
-                { rules: [{ required: true, message: 'Please input your name' }] },
               ]"
               placeholder="Please input your name"
             />
@@ -138,7 +137,6 @@
             <a-input
               v-decorator="[
                 'phone',
-                { rules: [{ required: true, message: 'Please input your mobile number' }] },
               ]"
               placeholder="Please input your mobile number"
             />
