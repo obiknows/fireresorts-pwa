@@ -31,28 +31,36 @@
               <!-- WHO -->
               <a-form-item
                 label="Party"
-                :label-col="{ span: 5 }"
-                :wrapper-col="{ span: 16 }"
+                :label-col="{ span: 4 }"
+                :wrapper-col="{ span: 20 }"
               >
                 <a-input-number
+                  :wrapper-col="{ span: 7 }"
                   v-decorator="['womenCount', 
                     {rules: [{ required: true, message: 'Please select number of ladies (min. 1)' }]}
                   ]"
                   :min="1"
                   :max="10"
                 />
-                <span class="ant-form-text">
+                <span 
+                  :wrapper-col="{ span: 3 }"
+                  class="ant-form-text"
+                >
                   Ladies
                 </span>
                
                 <a-input-number
+                  :wrapper-col="{ span: 7 }"
                   v-decorator="['menCount', 
                     {rules: [{ required: true, message: 'Please select number of men' }]}
                   ]"
                   :min="0"
                   :max="10"
                 />
-                <span class="ant-form-text">
+                <span 
+                  :wrapper-col="{ span: 3 }"
+                  class="ant-form-text"
+                >
                   Men
                 </span>
               </a-form-item>
