@@ -14,6 +14,7 @@
           :xs="{ span: 24, offset: 0 }"
           :md="{ span: 12, offset: 6 }"
           :lg="{ span: 12, offset: 6 }"
+          has-feedback
         >
           <a-input
             v-decorator="[
@@ -21,27 +22,23 @@
               {
                 rules: [
                   {
-                    type: 'email',
-                    message: 'The input is not valid E-mail!',
-                  },
-                  {
                     required: true,
-                    message: 'Please input your E-mail!',
+                    message: 'Please input your email!',
                   },
                 ],
               },
             ]"
-            placeholder="Email"
+            placeholder="Enter your email"
           >
           <a-icon
             slot="prefix"
-            type="lock"
+            type="mail"
             style="color: rgba(0,0,0,.25)"
           />
           </a-input>
         </a-form-item>
         <!-- PASSWORD -->
-        <a-form-item>
+        <a-form-item has-feedback>
           <a-input
             v-decorator="[
               'password',
@@ -66,9 +63,7 @@
               style="color: rgba(0,0,0,.25)"
             />
           </a-input>
-        </a-form-item>
-        <!-- CHECK PASSWORD -->
-        <a-form-item >
+          <!-- CHECK PASSWORD -->
           <a-input
             v-decorator="[
               'confirm',
@@ -96,7 +91,7 @@
           </a-input>
         </a-form-item>
         <!-- PHONE NUM -->
-        <a-form-item >
+        <a-form-item has-feedback >
           <a-input
             v-decorator="[
               'phone',
@@ -120,7 +115,7 @@
         v-show="user !== undefined && !user && networkOnLine"
         type="primary"
         data-test="login-btn"
-        @click="login"
+        @click="handleSubmit"
       >
         Create An Account
       </a-button>
@@ -136,9 +131,11 @@ import { mapState, mapMutations } from 'vuex'
 import { isNil } from 'lodash'
 import firebase from 'firebase/app'
 import { desktop as isDekstop } from 'is_js'
+import router from '@/router'
+
 
 export default {
-  data: () => ({ loginError: null }),
+  data: () => ({ registerError: null }),
   head: function() {
     return {
       title: {
@@ -172,28 +169,55 @@ export default {
   },
   methods: {
     ...mapMutations('authentication', ['setUser']),
-    async login() {
-      this.loginError = null
+    async register() {
+      this.registerError = null
       const provider = new firebase.auth.GoogleAuthProvider()
       this.setUser(undefined)
 
-      try {
-        // Firebase signin with popup is faster than redirect
-        // but we can't use it on mobile because it's not well supported
-        // when app is running as standalone on ios & android
-        isDekstop()
-          ? await firebase.auth().signInWithPopup(provider)
-          : await firebase.auth().signInWithRedirect(provider)
-      } catch (err) {
-        this.loginError = err
-        this.setUser(null)
-      }
+      // get the email and password and phone
+
+      
+      // add phone to user account
     },
     handleSubmit (e) {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values);
+
+          // get the email & password
+          const email = values.email;
+          const password = values.password;
+          // const username = values.username;
+
+          // use the email & password to login with firebase
+          // use email & password to create user
+          firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+            // Handle Errors here.
+            console.log('THERE WAS AN ERROR');
+            console.log(error);
+          });
+
+          // get the user profile
+          var user = firebase.auth().currentUser;
+
+          console.log(user);
+          
+          router.push('/dashboard');
+
+          // set a default photo url
+          user.updateProfile({
+            photoURL: "http://hotchillitri.co.uk/wp-content/uploads/2016/10/empty-avatar.jpg"
+          }).then(function() {
+            // Update successful.
+            // push them to the events map
+            router.push('/dashboard');
+
+          }).catch(function(error) {
+            // An error happened.
+            console.log(error);
+            
+          });
         }
       });
     },

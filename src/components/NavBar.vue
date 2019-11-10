@@ -12,9 +12,9 @@
     </div>
     <div class="links">
       <nav class="nav-links">
-        <div v-if="!isUserLoggedIn" class="nav-item">
+        <!-- <div v-if="!isUserLoggedIn" class="nav-item">
           <router-link to="/products">Promoters</router-link>
-        </div>
+        </div> -->
         <!-- LIT MAP -->
         <div v-if="isUserLoggedIn" class="nav-item">
           <router-link to="/dashboard">Map</router-link>
@@ -27,12 +27,12 @@
           <router-link to="/events">My Events</router-link>
         </div>
         <!-- LOGIN -->
-        <div v-if="!isUserLoggedIn && networkOnLine" class="nav-item">
+        <div v-if="!isUserLoggedIn" class="nav-item">
           <router-link to="/login">Login</router-link>
         </div>
         <!-- LOGOUT -->
         <div
-          v-if="isUserLoggedIn && networkOnLine"
+          v-if="isUserLoggedIn"
           class="nav-item logout-item"
           @click="logout"
         >
@@ -41,15 +41,14 @@
       </nav>
       <!-- Profile -->
       <a
-        v-if="isUserLoggedIn && networkOnLine"
+        v-if="isUserLoggedIn"
         href="/profile"
       >
         <img
-          v-if="isUserLoggedIn && networkOnLine"
+          v-if="isUserLoggedIn"
           class="user-picture can-hide"
           :src="user.photoURL"
           alt="Avatar"
-
         />
       </a>
     </div>
@@ -69,6 +68,7 @@ export default {
   methods: {
     async logout() {
       await firebase.auth().signOut()
+      await this.$router.push('/')
     }
   }
 }

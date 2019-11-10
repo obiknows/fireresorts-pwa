@@ -12,10 +12,10 @@
         <a-form-item>
           <a-input
             v-decorator="[
-              'userName',
-              { rules: [{ required: true, message: 'Please input your username!' }] }
+              'email',
+              { rules: [{ required: true, message: 'Please input your email!' }] }
             ]"
-            placeholder="Username"
+            placeholder="email"
           >
             <a-icon
               slot="prefix"
@@ -66,7 +66,7 @@
             Log in
           </a-button>
           Or <router-link to="register">
-            register now!
+            Create an Account
             </router-link>
         </a-form-item>
       </a-form>

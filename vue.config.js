@@ -20,6 +20,7 @@ const antDesignConfiguration = {
       less: {
         modifyVars: {
           'primary-color': 'red',
+          // 'primary-color': '#FC7948',
           'link-color': '#1DA57A',
           'border-radius-base': '2px',
         },
