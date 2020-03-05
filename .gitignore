@@ -11,6 +11,7 @@ node_modules
 .env.*.local
 
 # Or any env for that matter
+.env
 .env.production
 .env.*
 
